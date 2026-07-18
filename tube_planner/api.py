@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from dotenv import load_dotenv
 from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -14,6 +15,8 @@ from .formatting import display_name
 from .graph import Graph, load_graph
 from .lines import colour_for
 from .pathfinding import NoRouteError, UnknownStationError, shortest_route
+
+load_dotenv()
 
 app = FastAPI(title="London Underground Journey Planner API")
 
