@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>London Underground Journey Planner</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand">
+        <span class="roundel" aria-hidden="true"></span>
+        <div>
+          <h1>Journey Planner</h1>
+          <p class="subtitle">London Underground &mdash; live status &amp; fastest routes</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="layout">
+      <section class="card planner-card">
+        <form id="route-form" autocomplete="off">
+          <div class="field">
+            <label for="start-input">From</label>
+            <div class="autocomplete" data-field="start">
+              <input id="start-input" type="text" placeholder="Start station" required />
+              <ul class="suggestions" hidden></ul>
+            </div>
+          </div>
+
+          <button type="button" id="swap-button" class="swap-button" title="Swap stations" aria-label="Swap stations">&#8645;</button>
+
+          <div class="field">
+            <label for="end-input">To</label>
+            <div class="autocomplete" data-field="end">
+              <input id="end-input" type="text" placeholder="Destination station" required />
+              <ul class="suggestions" hidden></ul>
+            </div>
+          </div>
+
+          <label class="checkbox-field">
+            <input type="checkbox" id="avoid-disruptions" checked />
+            Avoid disrupted lines
+          </label>
+
+          <button type="submit" class="primary-button">Find route</button>
+        </form>
+
+        <div id="route-error" class="error-banner" hidden></div>
+
+        <div id="route-result" class="route-result" hidden>
+          <div class="route-summary">
+            <div class="stat">
+              <span class="stat-value" id="stat-time">&ndash;</span>
+              <span class="stat-label">minutes</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="stat-distance">&ndash;</span>
+              <span class="stat-label">km</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="stat-changes">&ndash;</span>
+              <span class="stat-label">changes</span>
+            </div>
+          </div>
+          <ol id="route-legs" class="route-legs"></ol>
+        </div>
+      </section>
+
+      <section class="card status-card">
+        <div class="card-header">
+          <h2>Live line status</h2>
+          <button id="refresh-status" class="text-button" type="button">Refresh</button>
+        </div>
+        <ul id="status-list" class="status-list"></ul>
+      </section>
+
+      <section class="card reviews-card" id="reviews-card" hidden>
+        <h2>Reviews of <span id="reviews-station"></span></h2>
+        <ul id="reviews-list" class="reviews-list"></ul>
+
+        <form id="review-form">
+          <div class="field">
+            <label for="review-comment">Share your experience</label>
+            <input id="review-comment" type="text" maxlength="500" placeholder="What was it like?" required />
+          </div>
+          <div class="review-form-row">
+            <div class="field">
+              <label for="review-author">Name (optional)</label>
+              <input id="review-author" type="text" maxlength="60" placeholder="Anonymous" />
+            </div>
+            <div class="field">
+              <label>Rating</label>
+              <div id="star-rating" class="star-rating" data-rating="5">
+                <button type="button" data-value="1">&#9733;</button>
+                <button type="button" data-value="2">&#9733;</button>
+                <button type="button" data-value="3">&#9733;</button>
+                <button type="button" data-value="4">&#9733;</button>
+                <button type="button" data-value="5">&#9733;</button>
+              </div>
+            </div>
+          </div>
+          <button type="submit" class="primary-button">Submit review</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      Built with FastAPI, SQLite and the TfL Unified API &middot; not affiliated with Transport for London
+    </footer>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
