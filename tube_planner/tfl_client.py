@@ -11,6 +11,14 @@ import time
 from dataclasses import dataclass
 
 import requests
+import truststore
+
+# Verify TLS certificates against the OS trust store rather than certifi's
+# bundled list. On networks that do TLS interception (school/corporate
+# firewalls, some antivirus software), certifi often doesn't trust the
+# interception root cert even though the OS already does, which otherwise
+# surfaces as a confusing SSLCertVerificationError.
+truststore.inject_into_ssl()
 
 STATUS_URL = "https://api.tfl.gov.uk/Line/Mode/tube/Status"
 CACHE_TTL_SECONDS = 60
