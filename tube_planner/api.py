@@ -62,6 +62,7 @@ class InterchangeOut(BaseModel):
 
 class RouteOut(BaseModel):
     stations: list[str]
+    end_station_id: str
     legs: list[LegOut]
     interchanges: list[InterchangeOut]
     total_time_min: float
@@ -133,6 +134,7 @@ def find_route(payload: RouteRequest) -> RouteOut:
 
     return RouteOut(
         stations=[display_name(s) for s in route.stations],
+        end_station_id=route.stations[-1],
         legs=[
             LegOut(
                 line=leg.line,

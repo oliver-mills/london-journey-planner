@@ -36,6 +36,7 @@ def test_find_route(client, monkeypatch):
     assert response.status_code == 200
     body = response.json()
     assert body["stations"] == ["A", "B", "C"]
+    assert body["end_station_id"] == "C"
     assert len(body["legs"]) == 2
     assert len(body["interchanges"]) == 1
 
