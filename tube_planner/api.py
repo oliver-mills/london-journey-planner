@@ -98,7 +98,7 @@ def line_status() -> list[LineStatusOut]:
     try:
         statuses = tfl_client.fetch_line_statuses()
     except tfl_client.TflApiError as exc:
-        raise HTTPException(status_code=502, detail=f"TfL API unavailable: {exc}") from exc
+        raise HTTPException(status_code=502, detail="TfL API is currently unavailable") from exc
 
     blocked = tfl_client.blocked_lines(statuses)
     return [

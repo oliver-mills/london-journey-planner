@@ -28,6 +28,28 @@ def test_list_stations(client):
     assert ids == {"A", "B", "C"}
 
 
+def test_status_success(client, monkeypatch):
+    monkeypatch.setattr(
+        tfl_client,
+        "fetch_line_statuses",
+        lambda use_cache=True: [tfl_client.LineStatus("Central", "Good Service")],
+    )
+    response = client.get("/api/status")
+    assert response.status_code == 200
+    body = response.json()
+    assert body[0]["line"] == "Central"
+    assert body[0]["blocked"] is False
+
+
+def test_status_upstream_failure_returns_502(client, monkeypatch):
+    def raise_error(use_cache=True):
+        raise tfl_client.TflApiError("boom")
+
+    monkeypatch.setattr(tfl_client, "fetch_line_statuses", raise_error)
+    response = client.get("/api/status")
+    assert response.status_code == 502
+
+
 def test_find_route(client, monkeypatch):
     monkeypatch.setattr(
         tfl_client, "fetch_line_statuses", lambda use_cache=True: []
