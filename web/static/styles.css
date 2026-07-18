@@ -289,29 +289,29 @@ input[type="text"]:focus {
   position: relative;
 }
 
-.leg {
+.segment {
   display: grid;
   grid-template-columns: 20px 1fr;
   gap: 12px;
-  padding-bottom: 18px;
+  padding-bottom: 16px;
   position: relative;
 }
 
-.leg::before {
+.segment::before {
   content: "";
   position: absolute;
   left: 9px;
-  top: 18px;
+  top: 22px;
   bottom: 0;
   width: 3px;
   background: var(--line-colour, var(--border));
   border-radius: 2px;
 }
-.leg:last-child::before {
+.segment:last-child::before {
   display: none;
 }
 
-.leg-dot {
+.segment-dot {
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -320,15 +320,7 @@ input[type="text"]:focus {
   box-shadow: 0 0 0 2px var(--line-colour, var(--border));
 }
 
-.leg-body .leg-station {
-  font-weight: 600;
-}
-.leg-body .leg-meta {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-.leg-body .line-chip {
+.segment-body .line-chip {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -336,16 +328,82 @@ input[type="text"]:focus {
   font-weight: 600;
   padding: 2px 8px;
   border-radius: 999px;
-  margin-top: 4px;
   background: color-mix(in srgb, var(--line-colour, var(--accent)) 22%, transparent);
   color: var(--line-colour, var(--text));
 }
 
-.interchange-badge {
+.segment-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-left: 8px;
+}
+
+.segment-route {
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.expand-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  background: none;
+  border: none;
+  color: var(--accent-2);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+}
+.expand-icon {
   display: inline-block;
-  margin-top: 4px;
-  font-size: 0.75rem;
+  transition: transform 0.2s ease;
+}
+.expand-button[aria-expanded="true"] .expand-icon {
+  transform: rotate(90deg);
+}
+
+.segment-stations {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.22s ease;
+}
+.segment-stations.expanded {
+  grid-template-rows: 1fr;
+}
+.segment-stations-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.segment-stations ul {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 8px 0 0 14px;
+  border-left: 2px dotted var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.segment-stations li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.interchange-connector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px 32px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
   color: #ffcf6b;
+  background: rgba(255, 207, 107, 0.1);
+  border: 1px solid rgba(255, 207, 107, 0.25);
+  border-radius: 8px;
+  width: fit-content;
+}
+.interchange-icon {
+  font-size: 0.9rem;
 }
 
 .status-list {

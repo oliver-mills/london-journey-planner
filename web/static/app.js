@@ -127,43 +127,100 @@ function resolveStationId(field, inputEl) {
   return match ? match.id : typed.toUpperCase();
 }
 
+function groupLegsIntoSegments(route) {
+  const segments = [];
+  route.legs.forEach((leg) => {
+    const current = segments[segments.length - 1];
+    if (current && current.line === leg.line) {
+      current.stops.push(leg.to_station);
+      current.timeMin += leg.time_min;
+    } else {
+      segments.push({
+        line: leg.line,
+        colour: leg.colour,
+        from: leg.from_station,
+        stops: [leg.to_station],
+        timeMin: leg.time_min,
+      });
+    }
+  });
+  return segments;
+}
+
+function renderSegment(segment, index) {
+  const to = segment.stops[segment.stops.length - 1];
+  const intermediate = segment.stops.slice(0, -1);
+  const stopCount = segment.stops.length;
+  const stopLabel = `${stopCount} stop${stopCount === 1 ? "" : "s"}`;
+
+  const collapsedLabel = `Show ${intermediate.length} stop${intermediate.length === 1 ? "" : "s"} between`;
+  const expandControl = intermediate.length
+    ? `<button type="button" class="expand-button" aria-expanded="false" data-collapsed-label="${escapeHtml(collapsedLabel)}">
+         <span class="expand-label">${collapsedLabel}</span>
+         <span class="expand-icon">&#8250;</span>
+       </button>`
+    : "";
+
+  const stationsList = intermediate.length
+    ? `<div class="segment-stations" data-segment="${index}">
+         <div class="segment-stations-inner">
+           <ul>${intermediate.map((s) => `<li>${escapeHtml(s)}</li>`).join("")}</ul>
+         </div>
+       </div>`
+    : "";
+
+  return `
+    <li class="segment" style="--line-colour:${segment.colour}">
+      <span class="segment-dot"></span>
+      <div class="segment-body">
+        <span class="line-chip" style="--line-colour:${segment.colour}">${escapeHtml(segment.line)}</span>
+        <span class="segment-meta">${stopLabel} &middot; ${segment.timeMin.toFixed(1)} min</span>
+        <div class="segment-route">${escapeHtml(segment.from)} &rarr; ${escapeHtml(to)}</div>
+        ${expandControl}
+        ${stationsList}
+      </div>
+    </li>`;
+}
+
+function renderInterchangeConnector(fromSegment, toSegment) {
+  return `
+    <li class="interchange-connector">
+      <span class="interchange-icon">&#8645;</span>
+      Change at <strong>${escapeHtml(fromSegment.stops[fromSegment.stops.length - 1])}</strong>
+      onto ${escapeHtml(toSegment.line)}
+    </li>`;
+}
+
 function renderRoute(route) {
   els.statTime.textContent = route.total_time_min;
   els.statDistance.textContent = route.total_distance_km;
   els.statChanges.textContent = route.interchanges.length;
 
-  const interchangeByStation = new Map(route.interchanges.map((i) => [i.station, i]));
+  const segments = groupLegsIntoSegments(route);
 
-  const rows = [{ station: route.stations[0], line: null, colour: null }];
-  route.legs.forEach((leg) => {
-    rows.push({ station: leg.to_station, line: leg.line, colour: leg.colour });
-  });
-
-  els.routeLegs.innerHTML = rows
-    .map((row) => {
-      const interchange = interchangeByStation.get(row.station);
-      const colour = row.colour || "var(--text-muted)";
-      const body = row.line
-        ? `<span class="line-chip" style="--line-colour:${colour}">${escapeHtml(row.line)}</span>`
-        : `<span class="leg-meta">Start</span>`;
-      const badge = interchange
-        ? `<div class="interchange-badge">Change ${escapeHtml(interchange.from_line)} &rarr; ${escapeHtml(interchange.to_line)}</div>`
-        : "";
-      return `
-        <li class="leg" style="--line-colour:${colour}">
-          <span class="leg-dot"></span>
-          <div class="leg-body">
-            <div class="leg-station">${escapeHtml(row.station)}</div>
-            ${body}
-            ${badge}
-          </div>
-        </li>`;
+  const html = segments
+    .map((segment, index) => {
+      const connector = index > 0 ? renderInterchangeConnector(segments[index - 1], segment) : "";
+      return connector + renderSegment(segment, index);
     })
     .join("");
+
+  els.routeLegs.innerHTML = html || `<li class="segment"><div class="segment-body">You're already there.</div></li>`;
 
   els.routeResult.hidden = false;
   currentEndStationId = route.end_station_id;
   loadReviews(currentEndStationId, route.stations[route.stations.length - 1]);
+}
+
+function handleRouteLegsClick(event) {
+  const button = event.target.closest(".expand-button");
+  if (!button) return;
+  const stations = button.parentElement.querySelector(".segment-stations");
+  const expanded = stations.classList.toggle("expanded");
+  button.setAttribute("aria-expanded", String(expanded));
+  button.querySelector(".expand-label").textContent = expanded
+    ? "Hide stops between"
+    : button.dataset.collapsedLabel;
 }
 
 function showError(message) {
@@ -306,6 +363,7 @@ async function init() {
   setupStarRating();
 
   els.form.addEventListener("submit", handleRouteSubmit);
+  els.routeLegs.addEventListener("click", handleRouteLegsClick);
   els.reviewForm.addEventListener("submit", handleReviewSubmit);
   els.refreshStatus.addEventListener("click", loadStatus);
 
