@@ -8,11 +8,3 @@ data/*.db
 .pytest_cache/
 .coverage
 .DS_Store
-
-# legacy pre-rewrite project files (kept locally, never committed)
-main.py
-stations.py
-tfl_api_call.py
-reviews.txt
-images/
-resources/
