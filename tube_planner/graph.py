@@ -7,6 +7,8 @@ import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
+from .geo import Position
+
 DB_PATH = Path(__file__).resolve().parent.parent / "data" / "tube.db"
 
 
@@ -41,6 +43,23 @@ def load_graph(db_path: Path = DB_PATH) -> Graph:
             graph[b].append(Edge(line, a, distance_km, time_min))
 
         return graph
+    finally:
+        conn.close()
+
+
+def load_positions(db_path: Path = DB_PATH) -> dict[str, Position]:
+    """Returns the geographic position of every station that has one.
+
+    Stations with no coordinates are omitted rather than returned with null
+    fields, so callers can treat the result as "everything mappable".
+    """
+    conn = sqlite3.connect(db_path)
+    try:
+        rows = conn.execute(
+            "SELECT name, lat, lon, zone FROM stations "
+            "WHERE lat IS NOT NULL AND lon IS NOT NULL"
+        )
+        return {name: Position(lat=lat, lon=lon, zone=zone) for name, lat, lon, zone in rows}
     finally:
         conn.close()
 
