@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt ruff
+
+      - name: Lint
+        run: ruff check .
+
+      # A few tests exercise the real network, so the database has to exist.
+      # Both of its inputs are committed, so this needs no network access.
+      - name: Build the station database
+        run: python scripts/build_database.py
+
+      - name: Test
+        run: pytest -q
+
+      - name: Verify A* still matches Dijkstra on every sampled route
+        run: python scripts/benchmark_pathfinding.py 300
