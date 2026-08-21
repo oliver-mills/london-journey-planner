@@ -15,7 +15,12 @@ from .formatting import display_name
 from .geo import Position, ProjectedNetwork, project
 from .graph import Graph, load_graph, load_positions
 from .lines import colour_for
-from .pathfinding import NoRouteError, UnknownStationError, shortest_route
+from .pathfinding import (
+    NoRouteError,
+    UnknownStationError,
+    max_speed_km_per_min,
+    shortest_route,
+)
 
 load_dotenv()
 
@@ -24,6 +29,10 @@ app = FastAPI(title="London Underground Journey Planner API")
 _graph: Graph | None = None
 _positions: dict[str, Position] | None = None
 _network: ProjectedNetwork | None = None
+# Paired with the graph it was derived from: a speed bound carried over from
+# a different graph could understate the network's top speed, which would
+# make the A* heuristic overestimate and quietly cost the search optimality.
+_max_speed: tuple[Graph, float] | None = None
 
 
 def get_graph() -> Graph:
@@ -31,6 +40,15 @@ def get_graph() -> Graph:
     if _graph is None:
         _graph = load_graph()
     return _graph
+
+
+def get_max_speed() -> float:
+    """The A* heuristic's speed bound, derived once rather than per request."""
+    global _max_speed
+    graph = get_graph()
+    if _max_speed is None or _max_speed[0] is not graph:
+        _max_speed = (graph, max_speed_km_per_min(graph))
+    return _max_speed[1]
 
 
 def get_positions() -> dict[str, Position]:
@@ -110,6 +128,15 @@ class NetworkOut(BaseModel):
     edges: list[MapEdgeOut]
 
 
+class DisruptionOut(BaseModel):
+    line: str
+    status: str
+    colour: str
+    avoided: bool
+    slowdown: float
+    on_route: bool
+
+
 class RouteOut(BaseModel):
     stations: list[str]
     station_ids: list[str]
@@ -118,6 +145,9 @@ class RouteOut(BaseModel):
     interchanges: list[InterchangeOut]
     total_time_min: float
     total_distance_km: float
+    disruptions: list[DisruptionOut]
+    live_status_used: bool
+    states_expanded: int
 
 
 class ReviewIn(BaseModel):
@@ -224,14 +254,29 @@ def find_route(payload: RouteRequest) -> RouteOut:
     end = payload.end.strip().upper()
 
     blocked: frozenset[str] = frozenset()
+    multipliers: dict[str, float] = {}
+    statuses: list[tfl_client.LineStatus] = []
+    live_status_used = False
+
     if payload.avoid_disruptions:
         try:
-            blocked = tfl_client.blocked_lines(tfl_client.fetch_line_statuses())
+            statuses = tfl_client.fetch_line_statuses()
+            blocked = tfl_client.blocked_lines(statuses)
+            multipliers = tfl_client.line_multipliers(statuses)
+            live_status_used = True
         except tfl_client.TflApiError:
             pass  # degrade gracefully: route without live status if TfL API is down
 
     try:
-        route = shortest_route(graph, start, end, blocked_lines=blocked)
+        route = shortest_route(
+            graph,
+            start,
+            end,
+            blocked_lines=blocked,
+            line_multipliers=multipliers,
+            positions=get_positions(),
+            network_max_speed=get_max_speed(),
+        )
     except UnknownStationError as exc:
         raise HTTPException(status_code=404, detail=f"Unknown station: {exc.args[0]}") from exc
     except NoRouteError as exc:
@@ -260,7 +305,36 @@ def find_route(payload: RouteRequest) -> RouteOut:
         ],
         total_time_min=route.total_time_min,
         total_distance_km=route.total_distance_km,
+        disruptions=_disruptions(statuses, blocked, multipliers, route),
+        live_status_used=live_status_used,
+        states_expanded=route.states_expanded,
     )
+
+
+def _disruptions(
+    statuses: list[tfl_client.LineStatus],
+    blocked: frozenset[str],
+    multipliers: dict[str, float],
+    route,
+) -> list[DisruptionOut]:
+    """Explains which live conditions shaped this route.
+
+    Only lines that actually affected the search are reported -- a line
+    running a good service has nothing to say about the journey.
+    """
+    lines_on_route = {leg.line for leg in route.legs}
+    return [
+        DisruptionOut(
+            line=status.line,
+            status=status.status,
+            colour=colour_for(status.line),
+            avoided=status.line in blocked,
+            slowdown=multipliers.get(status.line, 1.0),
+            on_route=status.line in lines_on_route,
+        )
+        for status in statuses
+        if status.line in blocked or status.line in multipliers
+    ]
 
 
 @app.get("/api/reviews/{station_id}", response_model=list[ReviewOut])

@@ -13,6 +13,10 @@ def client(monkeypatch):
         "C": [Edge("Blue", "B", 1.0, 3.0)],
     }
     monkeypatch.setattr(api, "_graph", test_graph)
+    # Keep the suite hermetic: without this, routing would fall through to
+    # loading positions out of data/tube.db, which a fresh clone has not
+    # built yet. An empty mapping just leaves A* with a zero heuristic.
+    monkeypatch.setattr(api, "_positions", {})
     monkeypatch.setattr(tfl_client, "_cache", {})
     return TestClient(api.app)
 

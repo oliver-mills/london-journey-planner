@@ -88,3 +88,16 @@ def test_route_returns_station_ids_alongside_display_names(client):
     assert payload["station_ids"] == ["A", "B", "C"]
     assert len(payload["station_ids"]) == len(payload["stations"])
     assert payload["end_station_id"] == "C"
+
+
+def test_max_speed_follows_the_graph_it_was_derived_from(client, monkeypatch):
+    """A cached speed bound from another graph would break A* optimality."""
+    slow = {"P": [Edge("L", "Q", 1.0, 10.0)], "Q": [Edge("L", "P", 1.0, 10.0)]}
+    fast = {"P": [Edge("L", "Q", 10.0, 1.0)], "Q": [Edge("L", "P", 10.0, 1.0)]}
+
+    monkeypatch.setattr(api, "_graph", slow)
+    monkeypatch.setattr(api, "_max_speed", None)
+    assert api.get_max_speed() == pytest.approx(0.1)
+
+    monkeypatch.setattr(api, "_graph", fast)
+    assert api.get_max_speed() == pytest.approx(10.0)
