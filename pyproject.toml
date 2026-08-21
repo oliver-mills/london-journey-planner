@@ -9,3 +9,13 @@ requires-python = ">=3.11"
 
 [tool.setuptools.packages.find]
 include = ["tube_planner*"]
+
+[tool.ruff]
+line-length = 100
+extend-exclude = [".venv"]
+
+[tool.ruff.lint]
+# pycodestyle, pyflakes, import sorting, pyupgrade, bugbear and comprehension
+# checks. E402 earns its place here: the scripts deliberately adjust sys.path
+# before importing the package, and their noqa markers record that as intent.
+select = ["E", "F", "I", "UP", "B", "C4"]

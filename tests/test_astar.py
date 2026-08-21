@@ -54,11 +54,13 @@ def grid():
                 distance = haversine_km(positions[here], positions[right])
                 # A deterministic wobble in speed, so edge times are not all
                 # in constant proportion to distance.
-                edges.append((f"Row{row}", here, right, distance, distance * (1.4 + 0.1 * ((row + col) % 4))))
+                pace = 1.4 + 0.1 * ((row + col) % 4)
+                edges.append((f"Row{row}", here, right, distance, distance * pace))
             if row + 1 < size:
                 below = f"R{row + 1}C{col}"
                 distance = haversine_km(positions[here], positions[below])
-                edges.append((f"Col{col}", here, below, distance, distance * (1.5 + 0.1 * ((row * col) % 3))))
+                pace = 1.5 + 0.1 * ((row * col) % 3)
+                edges.append((f"Col{col}", here, below, distance, distance * pace))
 
     return make_graph(edges), positions
 
@@ -95,7 +97,7 @@ def test_astar_never_explores_more_than_dijkstra(grid):
 def test_astar_actually_prunes_the_search(grid):
     """Guards against a heuristic that is admissible but uselessly weak."""
     graph, positions = grid
-    corner_to_corner = dict(start="R0C0", end="R5C5")
+    corner_to_corner = {"start": "R0C0", "end": "R5C5"}
 
     dijkstra = shortest_route(graph, **corner_to_corner)
     astar = shortest_route(graph, **corner_to_corner, positions=positions)
