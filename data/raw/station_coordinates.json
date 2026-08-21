@@ -1,0 +1,1357 @@
+{
+  "ACTON TOWN": {
+    "lat": 51.503057,
+    "lon": -0.280462,
+    "zone": "3"
+  },
+  "ALDGATE": {
+    "lat": 51.514246,
+    "lon": -0.075689,
+    "zone": "1"
+  },
+  "ALDGATE EAST": {
+    "lat": 51.515037,
+    "lon": -0.072384,
+    "zone": "1"
+  },
+  "ALPERTON": {
+    "lat": 51.540627,
+    "lon": -0.29961,
+    "zone": "4"
+  },
+  "AMERSHAM": {
+    "lat": 51.674126,
+    "lon": -0.607714,
+    "zone": "9"
+  },
+  "ANGEL": {
+    "lat": 51.53184,
+    "lon": -0.10635,
+    "zone": "1"
+  },
+  "ARCHWAY": {
+    "lat": 51.565478,
+    "lon": -0.134819,
+    "zone": "2+3"
+  },
+  "ARNOS GROVE": {
+    "lat": 51.616446,
+    "lon": -0.133062,
+    "zone": "4"
+  },
+  "ARSENAL": {
+    "lat": 51.558655,
+    "lon": -0.107457,
+    "zone": "2"
+  },
+  "BAKER STREET": {
+    "lat": 51.522883,
+    "lon": -0.15713,
+    "zone": "1"
+  },
+  "BALHAM": {
+    "lat": 51.443288,
+    "lon": -0.152997,
+    "zone": "3"
+  },
+  "BANK": {
+    "lat": 51.513356,
+    "lon": -0.088899,
+    "zone": "1"
+  },
+  "BARBICAN": {
+    "lat": 51.520275,
+    "lon": -0.097993,
+    "zone": "1"
+  },
+  "BARKING": {
+    "lat": 51.539321,
+    "lon": 0.081053,
+    "zone": "4"
+  },
+  "BARKINGSIDE": {
+    "lat": 51.585689,
+    "lon": 0.088585,
+    "zone": "4"
+  },
+  "BARONS COURT": {
+    "lat": 51.490311,
+    "lon": -0.213427,
+    "zone": "2"
+  },
+  "BAYSWATER": {
+    "lat": 51.512284,
+    "lon": -0.187938,
+    "zone": "1"
+  },
+  "BECONTREE": {
+    "lat": 51.540331,
+    "lon": 0.127016,
+    "zone": "5"
+  },
+  "BELSIZE PARK": {
+    "lat": 51.550529,
+    "lon": -0.164783,
+    "zone": "2"
+  },
+  "BERMONDSEY": {
+    "lat": 51.49775,
+    "lon": -0.063993,
+    "zone": "2"
+  },
+  "BETHNAL GREEN": {
+    "lat": 51.527222,
+    "lon": -0.055506,
+    "zone": "2"
+  },
+  "BLACKFRIARS": {
+    "lat": 51.511581,
+    "lon": -0.103659,
+    "zone": "1"
+  },
+  "BLACKHORSE ROAD": {
+    "lat": 51.586919,
+    "lon": -0.04115,
+    "zone": "3"
+  },
+  "BOND STREET": {
+    "lat": 51.514304,
+    "lon": -0.149723,
+    "zone": "1"
+  },
+  "BOROUGH": {
+    "lat": 51.501199,
+    "lon": -0.09337,
+    "zone": "1"
+  },
+  "BOSTON MANOR": {
+    "lat": 51.495635,
+    "lon": -0.324939,
+    "zone": "4"
+  },
+  "BOUNDS GREEN": {
+    "lat": 51.607034,
+    "lon": -0.124235,
+    "zone": "3+4"
+  },
+  "BOW ROAD": {
+    "lat": 51.52694,
+    "lon": -0.025128,
+    "zone": "2"
+  },
+  "BRENT CROSS": {
+    "lat": 51.57665,
+    "lon": -0.213622,
+    "zone": "3"
+  },
+  "BRIXTON": {
+    "lat": 51.462618,
+    "lon": -0.114888,
+    "zone": "2"
+  },
+  "BROMLEY BY BOW": {
+    "lat": 51.524839,
+    "lon": -0.011538,
+    "zone": "2/3"
+  },
+  "BUCKHURST HILL": {
+    "lat": 51.626605,
+    "lon": 0.046757,
+    "zone": "5"
+  },
+  "BURNT OAK": {
+    "lat": 51.602774,
+    "lon": -0.264048,
+    "zone": "4"
+  },
+  "CALEDONIAN ROAD": {
+    "lat": 51.548519,
+    "lon": -0.118493,
+    "zone": "2"
+  },
+  "CAMDEN TOWN": {
+    "lat": 51.539292,
+    "lon": -0.14274,
+    "zone": "2"
+  },
+  "CANADA WATER": {
+    "lat": 51.497931,
+    "lon": -0.049405,
+    "zone": "2"
+  },
+  "CANARY WHARF": {
+    "lat": 51.503488,
+    "lon": -0.018246,
+    "zone": "2"
+  },
+  "CANNING TOWN": {
+    "lat": 51.513584,
+    "lon": 0.008322,
+    "zone": "2/3"
+  },
+  "CANNON STREET": {
+    "lat": 51.51151,
+    "lon": -0.090432,
+    "zone": "1"
+  },
+  "CANONS PARK": {
+    "lat": 51.607701,
+    "lon": -0.294693,
+    "zone": "5"
+  },
+  "CHALFONT & LATIMER": {
+    "lat": 51.667985,
+    "lon": -0.560689,
+    "zone": "8"
+  },
+  "CHALK FARM": {
+    "lat": 51.544118,
+    "lon": -0.153388,
+    "zone": "2"
+  },
+  "CHANCERY LANE": {
+    "lat": 51.518247,
+    "lon": -0.111583,
+    "zone": "1"
+  },
+  "CHARING CROSS": {
+    "lat": 51.50741,
+    "lon": -0.127277,
+    "zone": "1"
+  },
+  "CHESHAM": {
+    "lat": 51.705208,
+    "lon": -0.611247,
+    "zone": "9"
+  },
+  "CHIGWELL": {
+    "lat": 51.617916,
+    "lon": 0.075041,
+    "zone": "4"
+  },
+  "CHISWICK PARK": {
+    "lat": 51.494627,
+    "lon": -0.267972,
+    "zone": "3"
+  },
+  "CHORLEYWOOD": {
+    "lat": 51.654358,
+    "lon": -0.518461,
+    "zone": "7"
+  },
+  "CLAPHAM COMMON": {
+    "lat": 51.461742,
+    "lon": -0.138317,
+    "zone": "2"
+  },
+  "CLAPHAM NORTH": {
+    "lat": 51.465135,
+    "lon": -0.130016,
+    "zone": "2"
+  },
+  "CLAPHAM SOUTH": {
+    "lat": 51.452654,
+    "lon": -0.147582,
+    "zone": "2+3"
+  },
+  "COCKFOSTERS": {
+    "lat": 51.65152,
+    "lon": -0.149171,
+    "zone": "5"
+  },
+  "COLINDALE": {
+    "lat": 51.595424,
+    "lon": -0.249919,
+    "zone": "4"
+  },
+  "COLLIERS WOOD": {
+    "lat": 51.41816,
+    "lon": -0.178086,
+    "zone": "3"
+  },
+  "COVENT GARDEN": {
+    "lat": 51.513093,
+    "lon": -0.124436,
+    "zone": "1"
+  },
+  "CROXLEY": {
+    "lat": 51.647044,
+    "lon": -0.441718,
+    "zone": "7"
+  },
+  "DAGENHAM EAST": {
+    "lat": 51.544096,
+    "lon": 0.166017,
+    "zone": "5"
+  },
+  "DAGENHAM HEATHWAY": {
+    "lat": 51.541639,
+    "lon": 0.147527,
+    "zone": "5"
+  },
+  "DEBDEN": {
+    "lat": 51.645386,
+    "lon": 0.083782,
+    "zone": "6"
+  },
+  "DOLLIS HILL": {
+    "lat": 51.551955,
+    "lon": -0.239068,
+    "zone": "3"
+  },
+  "EALING BROADWAY": {
+    "lat": 51.515017,
+    "lon": -0.301457,
+    "zone": "3"
+  },
+  "EALING COMMON": {
+    "lat": 51.51014,
+    "lon": -0.288265,
+    "zone": "3"
+  },
+  "EARLS COURT": {
+    "lat": 51.492063,
+    "lon": -0.193378,
+    "zone": "1+2"
+  },
+  "EAST ACTON": {
+    "lat": 51.516612,
+    "lon": -0.247248,
+    "zone": "2"
+  },
+  "EAST FINCHLEY": {
+    "lat": 51.587131,
+    "lon": -0.165012,
+    "zone": "3"
+  },
+  "EAST HAM": {
+    "lat": 51.538948,
+    "lon": 0.051186,
+    "zone": "3+4"
+  },
+  "EAST PUTNEY": {
+    "lat": 51.459205,
+    "lon": -0.211,
+    "zone": "2+3"
+  },
+  "EASTCOTE": {
+    "lat": 51.576506,
+    "lon": -0.397373,
+    "zone": "5"
+  },
+  "EDGWARE": {
+    "lat": 51.613653,
+    "lon": -0.274928,
+    "zone": "5"
+  },
+  "EDGWARE ROAD": {
+    "lat": 51.520299,
+    "lon": -0.17015,
+    "zone": "1"
+  },
+  "ELEPHANT & CASTLE": {
+    "lat": 51.494536,
+    "lon": -0.100606,
+    "zone": "1+2"
+  },
+  "ELM PARK": {
+    "lat": 51.549775,
+    "lon": 0.19864,
+    "zone": "6"
+  },
+  "EMBANKMENT": {
+    "lat": 51.507058,
+    "lon": -0.122666,
+    "zone": "1"
+  },
+  "EPPING": {
+    "lat": 51.69368,
+    "lon": 0.113767,
+    "zone": "6"
+  },
+  "EUSTON": {
+    "lat": 51.527824,
+    "lon": -0.131846,
+    "zone": "1"
+  },
+  "EUSTON SQUARE": {
+    "lat": 51.525604,
+    "lon": -0.135829,
+    "zone": "1"
+  },
+  "FAIRLOP": {
+    "lat": 51.595618,
+    "lon": 0.091004,
+    "zone": "4"
+  },
+  "FARRINGDON": {
+    "lat": 51.520252,
+    "lon": -0.104913,
+    "zone": "1"
+  },
+  "FINCHLEY CENTRAL": {
+    "lat": 51.600921,
+    "lon": -0.192527,
+    "zone": "4"
+  },
+  "FINCHLEY ROAD": {
+    "lat": 51.546825,
+    "lon": -0.179845,
+    "zone": "2"
+  },
+  "FINSBURY PARK": {
+    "lat": 51.564158,
+    "lon": -0.106825,
+    "zone": "2"
+  },
+  "FULHAM BROADWAY": {
+    "lat": 51.480081,
+    "lon": -0.195422,
+    "zone": "2"
+  },
+  "GANTS HILL": {
+    "lat": 51.576544,
+    "lon": 0.066185,
+    "zone": "4"
+  },
+  "GLOUCESTER ROAD": {
+    "lat": 51.494316,
+    "lon": -0.182658,
+    "zone": "1"
+  },
+  "GOLDERS GREEN": {
+    "lat": 51.572259,
+    "lon": -0.194039,
+    "zone": "3"
+  },
+  "GOLDHAWK ROAD": {
+    "lat": 51.502005,
+    "lon": -0.226715,
+    "zone": "2"
+  },
+  "GOODGE STREET": {
+    "lat": 51.520599,
+    "lon": -0.134361,
+    "zone": "1"
+  },
+  "GRANGE HILL": {
+    "lat": 51.613378,
+    "lon": 0.092066,
+    "zone": "4"
+  },
+  "GREAT PORTLAND STREET": {
+    "lat": 51.52384,
+    "lon": -0.144262,
+    "zone": "1"
+  },
+  "GREEN PARK": {
+    "lat": 51.506947,
+    "lon": -0.142787,
+    "zone": "1"
+  },
+  "GREENFORD": {
+    "lat": 51.542424,
+    "lon": -0.34605,
+    "zone": "4"
+  },
+  "GUNNERSBURY": {
+    "lat": 51.491803,
+    "lon": -0.275267,
+    "zone": "3"
+  },
+  "HAINAULT": {
+    "lat": 51.603659,
+    "lon": 0.093482,
+    "zone": "4"
+  },
+  "HAMMERSMITH": {
+    "lat": 51.49339,
+    "lon": -0.22503,
+    "zone": "2"
+  },
+  "HAMPSTEAD": {
+    "lat": 51.556239,
+    "lon": -0.177464,
+    "zone": "2+3"
+  },
+  "HANGER LANE": {
+    "lat": 51.530177,
+    "lon": -0.292704,
+    "zone": "3"
+  },
+  "HARLESDEN": {
+    "lat": 51.53631,
+    "lon": -0.257883,
+    "zone": "3"
+  },
+  "HARROW & WEALDSTONE": {
+    "lat": 51.592268,
+    "lon": -0.335217,
+    "zone": "5"
+  },
+  "HARROW-ON-THE-HILL": {
+    "lat": 51.579195,
+    "lon": -0.337225,
+    "zone": "5"
+  },
+  "HATTON CROSS": {
+    "lat": 51.466747,
+    "lon": -0.423191,
+    "zone": "5+6"
+  },
+  "HEATHROW 123": {
+    "lat": 51.471235,
+    "lon": -0.452265,
+    "zone": "6"
+  },
+  "HEATHROW TERMINAL FOUR": {
+    "lat": 51.458524,
+    "lon": -0.445771,
+    "zone": "6"
+  },
+  "HENDON CENTRAL": {
+    "lat": 51.583301,
+    "lon": -0.226424,
+    "zone": "3+4"
+  },
+  "HIGH BARNET": {
+    "lat": 51.650541,
+    "lon": -0.194298,
+    "zone": "5"
+  },
+  "HIGH STREET KENSINGTON": {
+    "lat": 51.501055,
+    "lon": -0.192792,
+    "zone": "1"
+  },
+  "HIGHBURY": {
+    "lat": 51.54635,
+    "lon": -0.103324,
+    "zone": "2"
+  },
+  "HIGHGATE": {
+    "lat": 51.577532,
+    "lon": -0.145857,
+    "zone": "3"
+  },
+  "HILLINGDON": {
+    "lat": 51.553715,
+    "lon": -0.449828,
+    "zone": "6"
+  },
+  "HOLBORN": {
+    "lat": 51.51758,
+    "lon": -0.120475,
+    "zone": "1"
+  },
+  "HOLLAND PARK": {
+    "lat": 51.507143,
+    "lon": -0.205679,
+    "zone": "2"
+  },
+  "HOLLOWAY ROAD": {
+    "lat": 51.552697,
+    "lon": -0.113244,
+    "zone": "2"
+  },
+  "HORNCHURCH": {
+    "lat": 51.554093,
+    "lon": 0.219116,
+    "zone": "6"
+  },
+  "HOUNSLOW CENTRAL": {
+    "lat": 51.471295,
+    "lon": -0.366578,
+    "zone": "4"
+  },
+  "HOUNSLOW EAST": {
+    "lat": 51.473213,
+    "lon": -0.356474,
+    "zone": "4"
+  },
+  "HOUNSLOW WEST": {
+    "lat": 51.473469,
+    "lon": -0.386544,
+    "zone": "5"
+  },
+  "HYDE PARK CORNER": {
+    "lat": 51.503035,
+    "lon": -0.152441,
+    "zone": "1"
+  },
+  "ICKENHAM": {
+    "lat": 51.56177,
+    "lon": -0.442225,
+    "zone": "6"
+  },
+  "KENNINGTON": {
+    "lat": 51.488337,
+    "lon": -0.105963,
+    "zone": "1+2"
+  },
+  "KENSAL GREEN": {
+    "lat": 51.530539,
+    "lon": -0.225016,
+    "zone": "2"
+  },
+  "KENSINGTON (OLYMPIA)": {
+    "lat": 51.497624,
+    "lon": -0.210015,
+    "zone": "2"
+  },
+  "KENTISH TOWN": {
+    "lat": 51.550312,
+    "lon": -0.140733,
+    "zone": "2"
+  },
+  "KENTON": {
+    "lat": 51.581756,
+    "lon": -0.31691,
+    "zone": "4"
+  },
+  "KEW GARDENS": {
+    "lat": 51.477058,
+    "lon": -0.285241,
+    "zone": "3+4"
+  },
+  "KILBURN": {
+    "lat": 51.547183,
+    "lon": -0.204248,
+    "zone": "2"
+  },
+  "KILBURN PARK": {
+    "lat": 51.534979,
+    "lon": -0.194232,
+    "zone": "2"
+  },
+  "KINGS CROSS ST PANCRAS": {
+    "lat": 51.530663,
+    "lon": -0.123194,
+    "zone": "1"
+  },
+  "KINGSBURY": {
+    "lat": 51.584845,
+    "lon": -0.27879,
+    "zone": "4"
+  },
+  "KNIGHTSBRIDGE": {
+    "lat": 51.501669,
+    "lon": -0.160508,
+    "zone": "1"
+  },
+  "LADBROKE GROVE": {
+    "lat": 51.517449,
+    "lon": -0.210391,
+    "zone": "2"
+  },
+  "LAMBETH NORTH": {
+    "lat": 51.498808,
+    "lon": -0.112315,
+    "zone": "1"
+  },
+  "LANCASTER GATE": {
+    "lat": 51.511723,
+    "lon": -0.175494,
+    "zone": "1"
+  },
+  "LATIMER ROAD": {
+    "lat": 51.513389,
+    "lon": -0.217799,
+    "zone": "2"
+  },
+  "LEICESTER SQUARE": {
+    "lat": 51.511386,
+    "lon": -0.128426,
+    "zone": "1"
+  },
+  "LEYTON": {
+    "lat": 51.556589,
+    "lon": -0.005523,
+    "zone": "3"
+  },
+  "LEYTONSTONE": {
+    "lat": 51.568324,
+    "lon": 0.008194,
+    "zone": "3+4"
+  },
+  "LIVERPOOL STREET": {
+    "lat": 51.517372,
+    "lon": -0.083182,
+    "zone": "1"
+  },
+  "LONDON BRIDGE": {
+    "lat": 51.505721,
+    "lon": -0.088873,
+    "zone": "1"
+  },
+  "LOUGHTON": {
+    "lat": 51.641443,
+    "lon": 0.055476,
+    "zone": "6"
+  },
+  "MAIDA VALE": {
+    "lat": 51.529777,
+    "lon": -0.185758,
+    "zone": "2"
+  },
+  "MANOR HOUSE": {
+    "lat": 51.570738,
+    "lon": -0.096118,
+    "zone": "2+3"
+  },
+  "MANSION HOUSE": {
+    "lat": 51.512117,
+    "lon": -0.094009,
+    "zone": "1"
+  },
+  "MARBLE ARCH": {
+    "lat": 51.513424,
+    "lon": -0.158953,
+    "zone": "1"
+  },
+  "MARYLEBONE": {
+    "lat": 51.522322,
+    "lon": -0.163207,
+    "zone": "1"
+  },
+  "MILE END": {
+    "lat": 51.525122,
+    "lon": -0.03364,
+    "zone": "2"
+  },
+  "MILL HILL EAST": {
+    "lat": 51.608229,
+    "lon": -0.209986,
+    "zone": "4"
+  },
+  "MONUMENT": {
+    "lat": 51.5107,
+    "lon": -0.085969,
+    "zone": "1"
+  },
+  "MOOR PARK": {
+    "lat": 51.629845,
+    "lon": -0.432454,
+    "zone": "6+7"
+  },
+  "MOORGATE": {
+    "lat": 51.518176,
+    "lon": -0.088322,
+    "zone": "1"
+  },
+  "MORDEN": {
+    "lat": 51.402142,
+    "lon": -0.194839,
+    "zone": "4"
+  },
+  "MORNINGTON CRESCENT": {
+    "lat": 51.534679,
+    "lon": -0.138789,
+    "zone": "2"
+  },
+  "NEASDEN": {
+    "lat": 51.553986,
+    "lon": -0.249837,
+    "zone": "3"
+  },
+  "NEW CROSS": {
+    "lat": 51.476344,
+    "lon": -0.032441,
+    "zone": "2"
+  },
+  "NEW CROSS GATE": {
+    "lat": 51.475128,
+    "lon": -0.040399,
+    "zone": "2"
+  },
+  "NEWBURY PARK": {
+    "lat": 51.575726,
+    "lon": 0.090004,
+    "zone": "4"
+  },
+  "NORTH ACTON": {
+    "lat": 51.523524,
+    "lon": -0.259755,
+    "zone": "2+3"
+  },
+  "NORTH EALING": {
+    "lat": 51.517505,
+    "lon": -0.288868,
+    "zone": "3"
+  },
+  "NORTH GREENWICH": {
+    "lat": 51.50047,
+    "lon": 0.004287,
+    "zone": "2/3"
+  },
+  "NORTH HARROW": {
+    "lat": 51.584872,
+    "lon": -0.362408,
+    "zone": "5"
+  },
+  "NORTH WEMBLEY": {
+    "lat": 51.562551,
+    "lon": -0.304,
+    "zone": "4"
+  },
+  "NORTHFIELDS": {
+    "lat": 51.499319,
+    "lon": -0.314719,
+    "zone": "3"
+  },
+  "NORTHOLT": {
+    "lat": 51.548236,
+    "lon": -0.368699,
+    "zone": "5"
+  },
+  "NORTHWICK PARK": {
+    "lat": 51.578481,
+    "lon": -0.318056,
+    "zone": "4"
+  },
+  "NORTHWOOD": {
+    "lat": 51.611053,
+    "lon": -0.423829,
+    "zone": "6"
+  },
+  "NORTHWOOD HILLS": {
+    "lat": 51.600572,
+    "lon": -0.409464,
+    "zone": "6"
+  },
+  "NOTTING HILL GATE": {
+    "lat": 51.509128,
+    "lon": -0.196104,
+    "zone": "1+2"
+  },
+  "OAKWOOD": {
+    "lat": 51.647726,
+    "lon": -0.132182,
+    "zone": "5"
+  },
+  "OLD STREET": {
+    "lat": 51.525864,
+    "lon": -0.08777,
+    "zone": "1"
+  },
+  "OSTERLEY": {
+    "lat": 51.481274,
+    "lon": -0.352224,
+    "zone": "4"
+  },
+  "OVAL": {
+    "lat": 51.48185,
+    "lon": -0.112439,
+    "zone": "2"
+  },
+  "OXFORD CIRCUS": {
+    "lat": 51.515224,
+    "lon": -0.141903,
+    "zone": "1"
+  },
+  "PADDINGTON": {
+    "lat": 51.516581,
+    "lon": -0.175689,
+    "zone": "1"
+  },
+  "PARK ROYAL": {
+    "lat": 51.527123,
+    "lon": -0.284341,
+    "zone": "3"
+  },
+  "PARSONS GREEN": {
+    "lat": 51.475277,
+    "lon": -0.20117,
+    "zone": "2"
+  },
+  "PERIVALE": {
+    "lat": 51.536717,
+    "lon": -0.323446,
+    "zone": "4"
+  },
+  "PICCADILLY CIRCUS": {
+    "lat": 51.51005,
+    "lon": -0.133798,
+    "zone": "1"
+  },
+  "PIMLICO": {
+    "lat": 51.489097,
+    "lon": -0.133761,
+    "zone": "1"
+  },
+  "PINNER": {
+    "lat": 51.592901,
+    "lon": -0.381161,
+    "zone": "5"
+  },
+  "PLAISTOW": {
+    "lat": 51.531341,
+    "lon": 0.017451,
+    "zone": "3"
+  },
+  "PRESTON ROAD": {
+    "lat": 51.571972,
+    "lon": -0.295107,
+    "zone": "4"
+  },
+  "PUTNEY BRIDGE": {
+    "lat": 51.468262,
+    "lon": -0.208731,
+    "zone": "2"
+  },
+  "QUEENS PARK": {
+    "lat": 51.534158,
+    "lon": -0.204574,
+    "zone": "2"
+  },
+  "QUEENSBURY": {
+    "lat": 51.594188,
+    "lon": -0.286219,
+    "zone": "4"
+  },
+  "QUEENSWAY": {
+    "lat": 51.510312,
+    "lon": -0.187152,
+    "zone": "1"
+  },
+  "RAVENSCOURT PARK": {
+    "lat": 51.494122,
+    "lon": -0.235881,
+    "zone": "2"
+  },
+  "RAYNERS LANE": {
+    "lat": 51.575147,
+    "lon": -0.371127,
+    "zone": "5"
+  },
+  "REDBRIDGE": {
+    "lat": 51.576243,
+    "lon": 0.04536,
+    "zone": "4"
+  },
+  "REGENTS PARK": {
+    "lat": 51.523344,
+    "lon": -0.146444,
+    "zone": "1"
+  },
+  "RICHMOND": {
+    "lat": 51.463237,
+    "lon": -0.301336,
+    "zone": "4"
+  },
+  "RICKMANSWORTH": {
+    "lat": 51.640207,
+    "lon": -0.473703,
+    "zone": "7"
+  },
+  "RODING VALLEY": {
+    "lat": 51.617199,
+    "lon": 0.043647,
+    "zone": "4"
+  },
+  "ROTHERHITHE": {
+    "lat": 51.500817,
+    "lon": -0.052048,
+    "zone": "2"
+  },
+  "ROYAL OAK": {
+    "lat": 51.519113,
+    "lon": -0.188748,
+    "zone": "2"
+  },
+  "RUISLIP": {
+    "lat": 51.571354,
+    "lon": -0.421898,
+    "zone": "6"
+  },
+  "RUISLIP GARDENS": {
+    "lat": 51.560736,
+    "lon": -0.41071,
+    "zone": "5"
+  },
+  "RUISLIP MANOR": {
+    "lat": 51.573202,
+    "lon": -0.412973,
+    "zone": "6"
+  },
+  "RUSSELL SQUARE": {
+    "lat": 51.523073,
+    "lon": -0.124285,
+    "zone": "1"
+  },
+  "SEVEN SISTERS": {
+    "lat": 51.58333,
+    "lon": -0.072584,
+    "zone": "3"
+  },
+  "SHADWELL": {
+    "lat": 51.511284,
+    "lon": -0.056934,
+    "zone": "2"
+  },
+  "SHEPHERDS BUSH": {
+    "lat": 51.504376,
+    "lon": -0.218813,
+    "zone": "2"
+  },
+  "SHOREDITCH": {
+    "lat": 51.523375,
+    "lon": -0.075246,
+    "zone": "1"
+  },
+  "SLOANE SQUARE": {
+    "lat": 51.49227,
+    "lon": -0.156377,
+    "zone": "1"
+  },
+  "SNARESBROOK": {
+    "lat": 51.580678,
+    "lon": 0.02144,
+    "zone": "4"
+  },
+  "SOUTH EALING": {
+    "lat": 51.501003,
+    "lon": -0.307424,
+    "zone": "3"
+  },
+  "SOUTH HARROW": {
+    "lat": 51.564888,
+    "lon": -0.352492,
+    "zone": "5"
+  },
+  "SOUTH KENSINGTON": {
+    "lat": 51.494094,
+    "lon": -0.174138,
+    "zone": "1"
+  },
+  "SOUTH KENTON": {
+    "lat": 51.570232,
+    "lon": -0.308433,
+    "zone": "4"
+  },
+  "SOUTH RUISLIP": {
+    "lat": 51.556853,
+    "lon": -0.398915,
+    "zone": "5"
+  },
+  "SOUTH WIMBLEDON": {
+    "lat": 51.415309,
+    "lon": -0.192005,
+    "zone": "3+4"
+  },
+  "SOUTH WOODFORD": {
+    "lat": 51.591907,
+    "lon": 0.027338,
+    "zone": "4"
+  },
+  "SOUTHFIELDS": {
+    "lat": 51.445073,
+    "lon": -0.206602,
+    "zone": "3"
+  },
+  "SOUTHGATE": {
+    "lat": 51.632315,
+    "lon": -0.127816,
+    "zone": "4"
+  },
+  "SOUTHWARK": {
+    "lat": 51.50427,
+    "lon": -0.105331,
+    "zone": "1"
+  },
+  "ST JAMES PARK": {
+    "lat": 51.499544,
+    "lon": -0.133608,
+    "zone": "1"
+  },
+  "ST JOHNS WOOD": {
+    "lat": 51.534521,
+    "lon": -0.173948,
+    "zone": "2"
+  },
+  "ST PAULS": {
+    "lat": 51.514936,
+    "lon": -0.097567,
+    "zone": "1"
+  },
+  "STAMFORD BROOK": {
+    "lat": 51.494917,
+    "lon": -0.245704,
+    "zone": "2"
+  },
+  "STANMORE": {
+    "lat": 51.619839,
+    "lon": -0.303266,
+    "zone": "5"
+  },
+  "STEPNEY GREEN": {
+    "lat": 51.521858,
+    "lon": -0.046596,
+    "zone": "2"
+  },
+  "STOCKWELL": {
+    "lat": 51.472184,
+    "lon": -0.122644,
+    "zone": "2"
+  },
+  "STONEBRIDGE PARK": {
+    "lat": 51.543959,
+    "lon": -0.275892,
+    "zone": "3"
+  },
+  "STRATFORD": {
+    "lat": 51.541806,
+    "lon": -0.003458,
+    "zone": "2/3"
+  },
+  "SUDBURY HILL": {
+    "lat": 51.556946,
+    "lon": -0.336435,
+    "zone": "4"
+  },
+  "SUDBURY TOWN": {
+    "lat": 51.550815,
+    "lon": -0.315745,
+    "zone": "4"
+  },
+  "SURREY QUAYS": {
+    "lat": 51.493196,
+    "lon": -0.047519,
+    "zone": "2"
+  },
+  "SWISS COTTAGE": {
+    "lat": 51.543681,
+    "lon": -0.174894,
+    "zone": "2"
+  },
+  "TEMPLE": {
+    "lat": 51.511006,
+    "lon": -0.11426,
+    "zone": "1"
+  },
+  "THEYDON BOIS": {
+    "lat": 51.671759,
+    "lon": 0.103085,
+    "zone": "6"
+  },
+  "TOOTING BEC": {
+    "lat": 51.435678,
+    "lon": -0.159736,
+    "zone": "3"
+  },
+  "TOOTING BROADWAY": {
+    "lat": 51.42763,
+    "lon": -0.168374,
+    "zone": "3"
+  },
+  "TOTTENHAM COURT ROAD": {
+    "lat": 51.516426,
+    "lon": -0.13041,
+    "zone": "1"
+  },
+  "TOTTENHAM HALE": {
+    "lat": 51.588108,
+    "lon": -0.060241,
+    "zone": "3"
+  },
+  "TOTTERIDGE & WHETSTONE": {
+    "lat": 51.630597,
+    "lon": -0.17921,
+    "zone": "4"
+  },
+  "TOWER HILL": {
+    "lat": 51.509971,
+    "lon": -0.076546,
+    "zone": "1"
+  },
+  "TUFNELL PARK": {
+    "lat": 51.556822,
+    "lon": -0.138433,
+    "zone": "2"
+  },
+  "TURNHAM GREEN": {
+    "lat": 51.495148,
+    "lon": -0.254555,
+    "zone": "2+3"
+  },
+  "TURNPIKE LANE": {
+    "lat": 51.590272,
+    "lon": -0.102953,
+    "zone": "3"
+  },
+  "UPMINSTER": {
+    "lat": 51.559063,
+    "lon": 0.250882,
+    "zone": "6"
+  },
+  "UPMINSTER BRIDGE": {
+    "lat": 51.55856,
+    "lon": 0.235809,
+    "zone": "6"
+  },
+  "UPNEY": {
+    "lat": 51.538372,
+    "lon": 0.10153,
+    "zone": "4"
+  },
+  "UPTON PARK": {
+    "lat": 51.53534,
+    "lon": 0.035263,
+    "zone": "3"
+  },
+  "UXBRIDGE": {
+    "lat": 51.546565,
+    "lon": -0.477949,
+    "zone": "6"
+  },
+  "VAUXHALL": {
+    "lat": 51.485743,
+    "lon": -0.124204,
+    "zone": "1+2"
+  },
+  "VICTORIA": {
+    "lat": 51.496359,
+    "lon": -0.143102,
+    "zone": "1"
+  },
+  "WALTHAMSTOW": {
+    "lat": 51.582965,
+    "lon": -0.019885,
+    "zone": "3"
+  },
+  "WANSTEAD": {
+    "lat": 51.575501,
+    "lon": 0.028527,
+    "zone": "4"
+  },
+  "WAPPING": {
+    "lat": 51.504388,
+    "lon": -0.055931,
+    "zone": "2"
+  },
+  "WARREN STREET": {
+    "lat": 51.524951,
+    "lon": -0.138321,
+    "zone": "1"
+  },
+  "WARWICK AVENUE": {
+    "lat": 51.523263,
+    "lon": -0.183783,
+    "zone": "2"
+  },
+  "WATERLOO": {
+    "lat": 51.503299,
+    "lon": -0.11478,
+    "zone": "1"
+  },
+  "WATFORD": {
+    "lat": 51.657446,
+    "lon": -0.417377,
+    "zone": "7"
+  },
+  "WEMBLEY CENTRAL": {
+    "lat": 51.552304,
+    "lon": -0.296852,
+    "zone": "4"
+  },
+  "WEMBLEY PARK": {
+    "lat": 51.563198,
+    "lon": -0.279262,
+    "zone": "4"
+  },
+  "WEST ACTON": {
+    "lat": 51.518001,
+    "lon": -0.28098,
+    "zone": "3"
+  },
+  "WEST BROMPTON": {
+    "lat": 51.487268,
+    "lon": -0.195599,
+    "zone": "2"
+  },
+  "WEST FINCHLEY": {
+    "lat": 51.609426,
+    "lon": -0.188362,
+    "zone": "4"
+  },
+  "WEST HAM": {
+    "lat": 51.528136,
+    "lon": 0.005055,
+    "zone": "2/3"
+  },
+  "WEST HAMPSTEAD": {
+    "lat": 51.546638,
+    "lon": -0.191059,
+    "zone": "2"
+  },
+  "WEST HARROW": {
+    "lat": 51.57971,
+    "lon": -0.3534,
+    "zone": "5"
+  },
+  "WEST KENSINGTON": {
+    "lat": 51.490459,
+    "lon": -0.206636,
+    "zone": "2"
+  },
+  "WEST RUISLIP": {
+    "lat": 51.569688,
+    "lon": -0.437886,
+    "zone": "6"
+  },
+  "WESTBOURNE PARK": {
+    "lat": 51.52111,
+    "lon": -0.201065,
+    "zone": "2"
+  },
+  "WESTMINSTER": {
+    "lat": 51.50132,
+    "lon": -0.124861,
+    "zone": "1"
+  },
+  "WHITE CITY": {
+    "lat": 51.511959,
+    "lon": -0.224297,
+    "zone": "2"
+  },
+  "WHITECHAPEL": {
+    "lat": 51.519518,
+    "lon": -0.059971,
+    "zone": "2"
+  },
+  "WILLESDEN GREEN": {
+    "lat": 51.549146,
+    "lon": -0.221537,
+    "zone": "2+3"
+  },
+  "WILLESDEN JUNCTION": {
+    "lat": 51.532259,
+    "lon": -0.244283,
+    "zone": "2+3"
+  },
+  "WIMBLEDON": {
+    "lat": 51.421207,
+    "lon": -0.206573,
+    "zone": "3"
+  },
+  "WIMBLEDON PARK": {
+    "lat": 51.434573,
+    "lon": -0.199719,
+    "zone": "3"
+  },
+  "WOOD GREEN": {
+    "lat": 51.597479,
+    "lon": -0.109886,
+    "zone": "3"
+  },
+  "WOODFORD": {
+    "lat": 51.606899,
+    "lon": 0.03397,
+    "zone": "4"
+  },
+  "WOODSIDE PARK": {
+    "lat": 51.618014,
+    "lon": -0.18542,
+    "zone": "4"
+  }
+}
