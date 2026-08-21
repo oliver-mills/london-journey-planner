@@ -23,13 +23,35 @@ truststore.inject_into_ssl()
 STATUS_URL = "https://api.tfl.gov.uk/Line/Mode/tube/Status"
 CACHE_TTL_SECONDS = 60
 
-# Severities under which TfL considers the line effectively unusable for
-# journey planning purposes.
+# Severities under which no train runs at all, so the line cannot form part
+# of any route.
 BLOCKING_SEVERITIES = {
     "Suspended",
-    "Part Suspended",
+    "Closed",
     "Planned Closure",
     "Service Closed",
+    "Not Running",
+}
+
+# Severities where the line still runs, but not as timetabled. These scale a
+# line's travel times so the planner treats it as the slower option it has
+# become, and routes around it only when doing so is genuinely quicker.
+#
+# "Part Suspended" and "Part Closure" are deliberately here rather than in
+# BLOCKING_SEVERITIES: TfL does not say *which* part is affected, and
+# discarding a whole line on that basis strands stations it still serves --
+# a route that warns you is more useful than no route at all. The multiplier
+# is large enough that any working alternative wins.
+DELAY_MULTIPLIERS = {
+    "Part Suspended": 4.0,
+    "Part Closure": 3.0,
+    "Bus Service": 3.0,
+    "Severe Delays": 2.5,
+    "Reduced Service": 1.6,
+    "Diverted": 1.5,
+    "Minor Delays": 1.25,
+    "Special Service": 1.2,
+    "Change of frequency": 1.15,
 }
 
 
@@ -76,4 +98,19 @@ def fetch_line_statuses(use_cache: bool = True) -> list[LineStatus]:
 
 
 def blocked_lines(statuses: list[LineStatus]) -> frozenset[str]:
+    """Lines that cannot be used at all right now."""
     return frozenset(s.line for s in statuses if s.status in BLOCKING_SEVERITIES)
+
+
+def line_multipliers(statuses: list[LineStatus]) -> dict[str, float]:
+    """Travel-time multipliers for lines running below their timetable.
+
+    Only degraded lines appear; anything running normally is simply absent,
+    which the planner reads as a multiplier of 1.0. Blocked lines are left
+    out too -- they are excluded by `blocked_lines`, not merely slowed.
+    """
+    return {
+        s.line: DELAY_MULTIPLIERS[s.status]
+        for s in statuses
+        if s.status in DELAY_MULTIPLIERS and s.status not in BLOCKING_SEVERITIES
+    }
