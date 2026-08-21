@@ -509,6 +509,217 @@ input[type="text"]:focus {
   font-size: 0.78rem;
 }
 
+/* ---------- Network map ---------- */
+
+.map-card {
+  grid-column: 1 / -1;
+}
+
+.map-hint {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.map-shell {
+  position: relative;
+  /* Matches the projected network's own proportions, so London fills the
+     frame instead of floating in a letterbox. */
+  aspect-ratio: 5 / 3;
+  min-height: 320px;
+  max-height: 78vh;
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.map-svg {
+  /* Set by map.js on every view change. Line weights and dot radii divide
+     by it so they stay a constant size on screen as the viewBox narrows. */
+  --zoom: 1;
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.map-svg.dragging {
+  cursor: grabbing;
+}
+
+.map-edge {
+  stroke-width: calc(2.6px / var(--zoom));
+  stroke-linecap: round;
+  opacity: 0.9;
+  transition: opacity 0.35s ease;
+}
+
+.map-svg.has-route .map-edge {
+  opacity: 0.15;
+}
+
+.route-halo {
+  fill: none;
+  /* A contrasting ring rather than a background-coloured one: it separates
+     the route from the dimmed network *and* rescues the lines whose official
+     colour is close to the page behind them -- the Northern line's black is
+     all but invisible on the dark theme without it. */
+  stroke: rgba(255, 255, 255, 0.45);
+  stroke-width: calc(9px / var(--zoom));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.route-line {
+  fill: none;
+  stroke-width: calc(5px / var(--zoom));
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.map-station {
+  r: calc(2.2px / var(--zoom));
+  fill: var(--bg);
+  stroke: var(--text-muted);
+  stroke-width: calc(1px / var(--zoom));
+  cursor: pointer;
+  transition: opacity 0.35s ease;
+}
+
+.map-station.interchange {
+  r: calc(3.4px / var(--zoom));
+  stroke: var(--text);
+  stroke-width: calc(1.4px / var(--zoom));
+}
+
+.map-svg.has-route .map-station {
+  opacity: 0.3;
+}
+
+.map-svg.has-route .map-station.on-route {
+  opacity: 1;
+  fill: var(--text);
+  stroke: var(--bg);
+}
+
+.map-label {
+  font-size: calc(9px / var(--zoom));
+  font-weight: 600;
+  fill: var(--text);
+  /* Draw the halo behind the glyphs rather than over them, so labels stay
+     readable wherever they cross a line. */
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: calc(3px / var(--zoom));
+  stroke-linejoin: round;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.map-svg.labels-interchange .map-label.interchange,
+.map-svg.labels-all .map-label,
+.map-svg.has-route .map-label.on-route {
+  opacity: 1;
+}
+
+/* A label is dropped when its marker already names the station, or when
+   decluttering gave its space to a higher-priority name. This uses `display`
+   rather than opacity so it never has to out-specify the reveal rules above,
+   which fight over opacity alone. */
+.map-label.endpoint,
+.map-label.collides {
+  display: none;
+}
+
+.map-marker .marker-ring {
+  r: calc(6px / var(--zoom));
+  fill: none;
+  stroke-width: calc(2.4px / var(--zoom));
+}
+
+.map-marker.start .marker-ring {
+  stroke: var(--good);
+}
+
+.map-marker.end .marker-ring {
+  stroke: var(--accent);
+}
+
+.map-marker .marker-label {
+  font-size: calc(11px / var(--zoom));
+  font-weight: 700;
+  text-anchor: middle;
+  fill: var(--text);
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: calc(3.5px / var(--zoom));
+  stroke-linejoin: round;
+}
+
+.map-controls {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.map-controls button {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.map-controls button:hover {
+  background: var(--bg-elevated-2);
+}
+
+.map-tooltip {
+  position: absolute;
+  transform: translate(-50%, calc(-100% - 14px));
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--bg-elevated);
+  box-shadow: var(--shadow);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.map-error {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.map-tooltip[hidden] {
+  display: none;
+}
+
+.tooltip-zone,
+.tooltip-lines {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --bg: #f4f6fb;
@@ -521,5 +732,13 @@ input[type="text"]:focus {
   }
   body {
     background: radial-gradient(circle at top left, #e8edfb, var(--bg) 55%);
+  }
+
+  .map-svg.has-route .map-edge {
+    opacity: 0.22;
+  }
+
+  .route-halo {
+    stroke: rgba(19, 26, 43, 0.32);
   }
 }

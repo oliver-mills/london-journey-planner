@@ -24,6 +24,7 @@ const els = {
   reviewComment: document.getElementById("review-comment"),
   reviewAuthor: document.getElementById("review-author"),
   starRating: document.getElementById("star-rating"),
+  mapShell: document.getElementById("map-shell"),
 };
 
 let currentEndStationId = null;
@@ -208,6 +209,7 @@ function renderRoute(route) {
   els.routeLegs.innerHTML = html || `<li class="segment"><div class="segment-body">You're already there.</div></li>`;
 
   els.routeResult.hidden = false;
+  TubeMap.showRoute(route);
   currentEndStationId = route.end_station_id;
   loadReviews(currentEndStationId, route.stations[route.stations.length - 1]);
 }
@@ -227,6 +229,7 @@ function showError(message) {
   els.routeError.textContent = message;
   els.routeError.hidden = false;
   els.routeResult.hidden = true;
+  TubeMap.clearRoute();
 }
 
 async function handleRouteSubmit(event) {
@@ -259,6 +262,33 @@ async function handleRouteSubmit(event) {
     renderRoute(body);
   } catch (err) {
     showError("Couldn't reach the journey planner API.");
+  }
+}
+
+// ---------- Map ----------
+
+/** Fills whichever end of the journey is waiting to be chosen.
+
+    Clicking the map is meant to feel like pointing at where you want to go,
+    so the first click sets the origin, the second sets the destination, and
+    a third starts a fresh journey rather than silently overwriting one end.
+ */
+function handleMapStationSelect(station) {
+  const bothChosen = els.startInput.value && els.endInput.value;
+  const field = !els.startInput.value || bothChosen ? "start" : "end";
+
+  if (field === "start" && bothChosen) {
+    els.endInput.value = "";
+    state.selected.end = null;
+    TubeMap.clearRoute();
+  }
+
+  const input = field === "start" ? els.startInput : els.endInput;
+  input.value = station.name;
+  state.selected[field] = station.id;
+
+  if (state.selected.start && state.selected.end) {
+    els.form.requestSubmit();
   }
 }
 
@@ -385,6 +415,10 @@ async function init() {
   } catch (err) {
     showError("Couldn't load the station list from the API.");
   }
+
+  TubeMap.init(els.mapShell, { onStationSelect: handleMapStationSelect }).catch(() => {
+    els.mapShell.innerHTML = `<p class="map-error">Couldn't load the network map.</p>`;
+  });
 
   loadStatus();
 }
