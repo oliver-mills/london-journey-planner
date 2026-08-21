@@ -8,3 +8,6 @@ data/*.db
 .pytest_cache/
 .coverage
 .DS_Store
+
+# Editor config: the interpreter path below is machine-specific.
+.vscode/
