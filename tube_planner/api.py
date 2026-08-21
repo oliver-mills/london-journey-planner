@@ -12,7 +12,8 @@ from pydantic import BaseModel, Field
 from . import reviews as reviews_store
 from . import tfl_client
 from .formatting import display_name
-from .graph import Graph, load_graph
+from .geo import Position, ProjectedNetwork, project
+from .graph import Graph, load_graph, load_positions
 from .lines import colour_for
 from .pathfinding import NoRouteError, UnknownStationError, shortest_route
 
@@ -21,6 +22,8 @@ load_dotenv()
 app = FastAPI(title="London Underground Journey Planner API")
 
 _graph: Graph | None = None
+_positions: dict[str, Position] | None = None
+_network: ProjectedNetwork | None = None
 
 
 def get_graph() -> Graph:
@@ -28,6 +31,25 @@ def get_graph() -> Graph:
     if _graph is None:
         _graph = load_graph()
     return _graph
+
+
+def get_positions() -> dict[str, Position]:
+    global _positions
+    if _positions is None:
+        _positions = load_positions()
+    return _positions
+
+
+def get_network() -> ProjectedNetwork:
+    """The projected map, computed once and reused.
+
+    Station positions never change at runtime, so projecting them on every
+    request would be pure waste.
+    """
+    global _network
+    if _network is None:
+        _network = project(get_positions())
+    return _network
 
 
 class StationOut(BaseModel):
@@ -63,8 +85,34 @@ class InterchangeOut(BaseModel):
     to_line: str
 
 
+class MapStationOut(BaseModel):
+    id: str
+    name: str
+    x: float
+    y: float
+    zone: str | None = None
+    lines: list[str]
+
+
+class MapEdgeOut(BaseModel):
+    line: str
+    colour: str
+    x1: float
+    y1: float
+    x2: float
+    y2: float
+
+
+class NetworkOut(BaseModel):
+    width: float
+    height: float
+    stations: list[MapStationOut]
+    edges: list[MapEdgeOut]
+
+
 class RouteOut(BaseModel):
     stations: list[str]
+    station_ids: list[str]
     end_station_id: str
     legs: list[LegOut]
     interchanges: list[InterchangeOut]
@@ -115,6 +163,60 @@ def line_status() -> list[LineStatusOut]:
     ]
 
 
+@app.get("/api/network", response_model=NetworkOut)
+def network() -> NetworkOut:
+    """The whole tube map, pre-projected into SVG coordinates.
+
+    Edges are emitted once per line that runs between a pair of stations, so
+    a shared stretch of track drawn for two lines produces two overlapping
+    segments -- which is what lets the frontend draw them side by side the
+    way a real tube map does.
+    """
+    graph = get_graph()
+    positions = get_positions()
+    projected = get_network()
+    points = projected.points
+
+    lines_by_station: dict[str, set[str]] = {}
+    seen: set[tuple[str, str, str]] = set()
+    edges: list[MapEdgeOut] = []
+
+    for station, station_edges in graph.items():
+        for edge in station_edges:
+            lines_by_station.setdefault(station, set()).add(edge.line)
+            a, b = sorted((station, edge.to))
+            key = (edge.line, a, b)
+            if key in seen or a not in points or b not in points:
+                continue
+            seen.add(key)
+            edges.append(
+                MapEdgeOut(
+                    line=edge.line,
+                    colour=colour_for(edge.line),
+                    x1=points[a].x,
+                    y1=points[a].y,
+                    x2=points[b].x,
+                    y2=points[b].y,
+                )
+            )
+
+    stations = [
+        MapStationOut(
+            id=name,
+            name=display_name(name),
+            x=point.x,
+            y=point.y,
+            zone=positions[name].zone,
+            lines=sorted(lines_by_station.get(name, ())),
+        )
+        for name, point in sorted(points.items())
+    ]
+
+    return NetworkOut(
+        width=projected.width, height=projected.height, stations=stations, edges=edges
+    )
+
+
 @app.post("/api/route", response_model=RouteOut)
 def find_route(payload: RouteRequest) -> RouteOut:
     graph = get_graph()
@@ -137,6 +239,7 @@ def find_route(payload: RouteRequest) -> RouteOut:
 
     return RouteOut(
         stations=[display_name(s) for s in route.stations],
+        station_ids=route.stations,
         end_station_id=route.stations[-1],
         legs=[
             LegOut(
