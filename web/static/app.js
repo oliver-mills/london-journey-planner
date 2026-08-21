@@ -15,6 +15,7 @@ const els = {
   statDistance: document.getElementById("stat-distance"),
   statChanges: document.getElementById("stat-changes"),
   routeLegs: document.getElementById("route-legs"),
+  routeDisruptions: document.getElementById("route-disruptions"),
   statusList: document.getElementById("status-list"),
   refreshStatus: document.getElementById("refresh-status"),
   reviewsCard: document.getElementById("reviews-card"),
@@ -192,6 +193,37 @@ function renderInterchangeConnector(fromSegment, toSegment) {
     </li>`;
 }
 
+function renderDisruptions(route) {
+  const disruptions = route.disruptions || [];
+  if (disruptions.length === 0) {
+    els.routeDisruptions.hidden = true;
+    els.routeDisruptions.innerHTML = "";
+    return;
+  }
+
+  // Sort avoided lines first: "we routed you around this" is the more
+  // surprising thing to be told, so it belongs at the top.
+  const ordered = [...disruptions].sort((a, b) => Number(b.avoided) - Number(a.avoided));
+
+  els.routeDisruptions.innerHTML = ordered
+    .map((d) => {
+      const effect = d.avoided
+        ? "routed around it"
+        : d.on_route
+          ? `used anyway, ${Math.round((d.slowdown - 1) * 100)}% slower`
+          : "not needed for this route";
+      return `
+        <li class="disruption" style="--line-colour:${d.colour}">
+          <span class="disruption-dot"></span>
+          <span class="disruption-line">${escapeHtml(d.line)}</span>
+          <span class="disruption-status">${escapeHtml(d.status)}</span>
+          <span class="disruption-effect">${escapeHtml(effect)}</span>
+        </li>`;
+    })
+    .join("");
+  els.routeDisruptions.hidden = false;
+}
+
 function renderRoute(route) {
   els.statTime.textContent = route.total_time_min;
   els.statDistance.textContent = route.total_distance_km;
@@ -207,6 +239,8 @@ function renderRoute(route) {
     .join("");
 
   els.routeLegs.innerHTML = html || `<li class="segment"><div class="segment-body">You're already there.</div></li>`;
+
+  renderDisruptions(route);
 
   els.routeResult.hidden = false;
   TubeMap.showRoute(route);
