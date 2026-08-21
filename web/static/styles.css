@@ -76,6 +76,11 @@ body {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
   gap: 20px;
+  /* Let each card size to its own content. Grid stretches items to the
+     tallest in the row by default, which left the planner padded out to
+     the height of the much longer status list -- around 400px of empty
+     card before a route has been searched for. */
+  align-items: start;
 }
 
 .reviews-card {
@@ -242,6 +247,34 @@ input[type="text"]:focus {
   padding: 10px 14px;
   border-radius: 10px;
   font-size: 0.88rem;
+}
+
+.planner-hint {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  text-align: center;
+}
+
+.planner-hint[hidden] {
+  display: none;
+}
+
+/* The card grows as results arrive, so ease them in rather than letting
+   the layout snap. */
+.route-result {
+  animation: route-in 0.28s ease both;
+}
+
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .route-result {

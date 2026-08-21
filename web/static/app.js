@@ -16,6 +16,7 @@ const els = {
   statChanges: document.getElementById("stat-changes"),
   routeLegs: document.getElementById("route-legs"),
   routeDisruptions: document.getElementById("route-disruptions"),
+  plannerHint: document.getElementById("planner-hint"),
   statusList: document.getElementById("status-list"),
   refreshStatus: document.getElementById("refresh-status"),
   reviewsCard: document.getElementById("reviews-card"),
@@ -242,6 +243,7 @@ function renderRoute(route) {
 
   renderDisruptions(route);
 
+  els.plannerHint.hidden = true;
   els.routeResult.hidden = false;
   TubeMap.showRoute(route);
   currentEndStationId = route.end_station_id;
