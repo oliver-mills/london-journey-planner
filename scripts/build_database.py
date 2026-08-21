@@ -6,20 +6,27 @@ and "Bakerloo Northbound"), and station names are inconsistently split across
 platform/branch qualifiers. This script normalises that into a clean,
 undirected station graph stored in SQLite:
 
-  stations(id, name)
+  stations(id, name, lat, lon, zone)
   edges(id, line, station_a_id, station_b_id, distance_km, time_min)
+
+Station positions come from data/raw/station_coordinates.json, which is
+produced separately by scripts/fetch_station_coordinates.py -- the
+spreadsheet itself contains no geography.
 
 Run with: python scripts/build_database.py
 """
 from __future__ import annotations
 
+import json
 import sqlite3
 from pathlib import Path
 
 import openpyxl
 
-RAW_PATH = Path(__file__).resolve().parent.parent / "data" / "raw" / "station_database.xlsx"
-DB_PATH = Path(__file__).resolve().parent.parent / "data" / "tube.db"
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+RAW_PATH = DATA_DIR / "raw" / "station_database.xlsx"
+COORDS_PATH = DATA_DIR / "raw" / "station_coordinates.json"
+DB_PATH = DATA_DIR / "tube.db"
 
 # Some rows in the source data name the same physical station differently
 # depending on which branch/platform/line the row was recorded for. Left
@@ -95,7 +102,27 @@ def read_rows() -> list[tuple[str, str, str, float, float]]:
     return edges
 
 
-def build_database(edges: list[tuple[str, str, str, float, float]]) -> None:
+def read_coordinates() -> dict[str, dict]:
+    """Loads cached station positions, if they have been fetched yet.
+
+    Absent or incomplete coordinates are not fatal: the graph and routing
+    work without them, and the map simply omits the stations it can't place.
+    """
+    if not COORDS_PATH.exists():
+        print(
+            f"warning: {COORDS_PATH.name} not found -- stations will have no "
+            f"coordinates and the map will be empty. Run "
+            f"`python scripts/fetch_station_coordinates.py` to populate it."
+        )
+        return {}
+    return json.loads(COORDS_PATH.read_text(encoding="utf-8"))
+
+
+def build_database(
+    edges: list[tuple[str, str, str, float, float]],
+    coordinates: dict[str, dict] | None = None,
+) -> None:
+    coordinates = coordinates or {}
     DB_PATH.parent.mkdir(parents=True, exist_ok=True)
     if DB_PATH.exists():
         DB_PATH.unlink()
@@ -106,7 +133,10 @@ def build_database(edges: list[tuple[str, str, str, float, float]]) -> None:
         """
         CREATE TABLE stations (
             id   INTEGER PRIMARY KEY,
-            name TEXT UNIQUE NOT NULL
+            name TEXT UNIQUE NOT NULL,
+            lat  REAL,
+            lon  REAL,
+            zone TEXT
         );
 
         CREATE TABLE edges (
@@ -133,7 +163,11 @@ def build_database(edges: list[tuple[str, str, str, float, float]]) -> None:
 
     def station_id(name: str) -> int:
         if name not in station_ids:
-            cur = conn.execute("INSERT INTO stations (name) VALUES (?)", (name,))
+            position = coordinates.get(name, {})
+            cur = conn.execute(
+                "INSERT INTO stations (name, lat, lon, zone) VALUES (?, ?, ?, ?)",
+                (name, position.get("lat"), position.get("lon"), position.get("zone")),
+            )
             station_ids[name] = cur.lastrowid
         return station_ids[name]
 
@@ -152,8 +186,17 @@ def build_database(edges: list[tuple[str, str, str, float, float]]) -> None:
 
 def main() -> None:
     edges = read_rows()
-    build_database(edges)
-    print(f"Built {DB_PATH} with {len(edges)} edges")
+    coordinates = read_coordinates()
+    build_database(edges, coordinates)
+
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        total, located = conn.execute(
+            "SELECT COUNT(*), COUNT(lat) FROM stations"
+        ).fetchone()
+    finally:
+        conn.close()
+    print(f"Built {DB_PATH} with {total} stations ({located} located) and {len(edges)} edges")
 
 
 if __name__ == "__main__":
